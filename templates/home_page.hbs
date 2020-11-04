@@ -1,0 +1,138 @@
+{{!-- Hide header background on the home page --}}
+<style>
+  .header {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  .Alltopic-Head {
+    position: absolute;
+    width: 228px;
+    height: 36px;
+    font-family: Quantico;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 34px;
+    color: #000000;
+  }
+  . Alltopic-menu{
+		position: absolute;
+    width: 307px;
+    height: 36px;
+    font-family: Quantico;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 26px;
+    color: #000000;
+  }
+</style>
+
+<section class="section hero" style="height:300px;">
+  <div class="hero-inner">
+    <h1 class="hero-inner-home-heading" style="color:black;">Help Center</h1>
+    <h3>Search our knowledge base or browse categories</h3>
+    <div class="hero-inner-search">
+      {{search submit=false instant=settings.instant_search class="search search-full" placeholder="Search.."}}
+    </div>
+<!--     <p class="hero-inner-description"><strong><i class="fas fa-book"></i> Guides:</strong> getting started with <a
+        href="/hc/en-us/articles/360014969032">Evoko Liso</a> or <a href="/hc/en-us/articles/360032926451">Evoko
+        Pusco</a>?</p> -->
+  </div>
+</section>
+<div class="container">
+  <div class="row">
+    <h1> Latest Announcements</h1>
+  </div>
+  <div class="row">
+    <div class ="col">
+      <section class="knowledge-base">
+       {{#if categories}}
+        <div class="category-tree">
+       	{{#each categories}}
+       		<section class="category">
+       			{{#each sections}}
+       				<section class="section">
+       					{{#if articles}}
+       						<ul>
+       							{{#each articles}}
+       								<li {{#if promoted}} class="article-promoted" {{/if}}>
+       									<a href="{{url}}" style="color: inherit;">{{title}}</a>
+       								</li>
+       							{{/each}}
+                    {{#each sections}}
+       								<li {{#if name}} class="article-promoted" {{/if}}>
+       									<a href="{{url}}" style="color: inherit;">{{name}}</a>
+       								</li>
+       							{{/each}}
+       						</ul>
+       					{{/if}}
+       				</section>
+       			{{else}}
+       				<i class="category-empty">
+       					<a href="{{url}}">{{t 'empty'}}</a>
+       				</i>
+       			{{/each}}
+       			{{#if more_sections}}
+       			<div>
+       				<a href="{{url}}">{{t 'see_all_sections'}}</a>
+       			</div>
+       			{{/if}}
+      		</section>
+       	{{/each}}
+       	{{pagination}}
+       </div>
+       {{/if}}
+      </section>
+    </div>
+  </div>
+  <div class="d-flex flex-row-reverse">
+    <ul>
+      {{#each categories}}
+          {{#each sections}}
+        		{{#is name 'Announcements'}}
+            	<li class="section-name">
+              	<a href="{{url}}">Show all Announcements</a>
+            	</li>
+        		{{/is}}
+          {{/each}}
+      {{/each}}
+			</ul>
+  </div>
+</div>
+  <br>
+<div style="background-color: #f7fafc; padding-top:50px; padding-bottom:50px;">
+  <div class="container">
+    <div>
+      <h1> All Topics</h1>
+    </div>
+    <br>
+    <section class="knowledge-base">
+      <ul class="list-unstyled md:column-count-2 lg:column-count-3 my-6">
+        {{#each categories}}
+          {{#each sections}}
+            {{#is name 'User Guide'}}
+                {{#each sections}}
+        					<li class="mb-5">	
+                    <div class="card card-body bg-white">
+                      <h3 class="my-3 font-medium">
+                      	<a style="color:black;" href="{{url}}"> {{name}}</a>
+        							</h3>
+                      {{#each articles}}
+                      
+                        <a class="Alltopic-menu" href="{{url}}" style="color: inherit; padding-left: 10px;"><img src="{{asset 'icon.JPG'}}"> {{ title }}  </a>
+                      <hr>
+                      {{/each}}
+                    </div>
+        					</li>
+              	{{/each}}
+        				
+        
+        
+            {{/is}}
+          {{/each}}
+        {{/each}}
+      </ul>
+    </section>
+  </div>
+</div>
